@@ -17,6 +17,11 @@ INSERT INTO Jour_Ferie (date_ferie, description) VALUES ('2025-01-01', 'Nouvel A
 INSERT INTO Jour_Ferie (date_ferie, description) VALUES ('2025-03-29', 'Insurrection');
 INSERT INTO Jour_Ferie (date_ferie, description) VALUES ('2025-05-01', 'Travail');
 
+INSERT INTO Abonnement (id_adherent, date_debut, date_fin) VALUES
+(1, '2025-07-01', '2025-12-31'),
+(2, '2025-06-01', '2025-09-30'),
+(3, '2025-07-01', '2025-07-31');
+
 -- Statut
 INSERT INTO Statut (libelle) VALUES ('en_cours');
 INSERT INTO Statut (libelle) VALUES ('termine');

@@ -73,6 +73,14 @@ CREATE TABLE IF NOT EXISTS Pret (
     id_statut INT REFERENCES Statut(id_statut)
 );
 
+-- Table des abonnements
+CREATE TABLE IF NOT EXISTS Abonnement (
+    id_abonnement SERIAL PRIMARY KEY,
+    id_adherent INT REFERENCES Adherent(id_adherent),
+    date_debut DATE NOT NULL,
+    date_fin DATE NOT NULL
+);
+
 -- Table des prolongements de prêt
 CREATE TABLE IF NOT EXISTS Prolongement (
     id_prolongement SERIAL PRIMARY KEY,

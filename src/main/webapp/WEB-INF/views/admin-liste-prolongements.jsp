@@ -34,6 +34,6 @@
             </tr>
         </c:forEach>
     </table>
-       <a href="/liste">Retour a l acceuil</a>
+       <a href="/adherents">Retour a l acceuil</a>
 </body>
 </html>

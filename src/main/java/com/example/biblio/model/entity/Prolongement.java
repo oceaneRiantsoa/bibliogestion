@@ -69,9 +69,8 @@ public class Prolongement {
         this.statut = statut;
     }
     public String getStatutValidation() {
-    return statutValidation;
+        return statutValidation;
 }
-
     public void setStatutValidation(String statutValidation) {
         this.statutValidation = statutValidation;
 }

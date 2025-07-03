@@ -28,6 +28,5 @@ public class AbonnementDto {
 
     public LocalDate getDateFin() { return dateFin; }
     public void setDateFin(LocalDate dateFin) { this.dateFin = dateFin; }
-} {
-    
+
 }

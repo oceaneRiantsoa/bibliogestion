@@ -20,20 +20,20 @@
             <th>Actions</th>
         </tr>
         <c:forEach var="adherent" items="${adherents}">
-            <tr>
-                <td>${adherent.idAdherent}</td>
-                <td>${adherent.nom}</td>
-                <td>${adherent.prenom}</td>
-                <td>
-                    <a href="/adherents/${adherent.idAdherent}">Détails</a>
-                    <a href="/adherents/edit/${adherent.idAdherent}">Modifier</a>
-                    <a href="/adherents/delete/${adherent.idAdherent}" 
-                       onclick="return confirm('Voulez-vous vraiment supprimer cet adhérent ?');">Supprimer</a>
-                </td>
-            </tr>
-        </c:forEach>
+    <tr>
+        <td>${adherent.idAdherent}</td>
+        <td>${adherent.nom}</td>
+        <td>${adherent.prenom}</td>
+        <td>
+            <a href="/adherents/${adherent.idAdherent}">Détails</a>
+            <a href="/adherents/edit/${adherent.idAdherent}">Modifier</a>
+            <a href="/adherents/delete/${adherent.idAdherent}" 
+               onclick="return confirm('Voulez-vous vraiment supprimer cet adhérent ?');">Supprimer</a>
+            <a href="/abonnements/new/${adherent.idAdherent}">Faire abonnement</a>
+        </td>
+    </tr>
+</c:forEach>
     </table>
 
-    <a href="/abonnements/new/${adherent.idAdherent}">Faire abonnement</a>
 </body>
 </html>

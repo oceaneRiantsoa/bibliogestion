@@ -13,7 +13,7 @@
         <label>Date fin :</label>
         <input type="date" name="dateFin" required /><br>
         <button type="submit">Valider</button>
-        <a href="/liste">Annuler</a>
+        <a href="/adherents">Annuler</a>
     </form>
 </body>
 </html>

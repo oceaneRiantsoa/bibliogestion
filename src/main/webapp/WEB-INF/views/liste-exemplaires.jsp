@@ -47,5 +47,8 @@
             </c:forEach>
         </table>
     </c:if>
+
+        <a href="/" style="float:right; color:red; margin-left:20px;">Déconnexion</a>
+    
 </body>
 </html>

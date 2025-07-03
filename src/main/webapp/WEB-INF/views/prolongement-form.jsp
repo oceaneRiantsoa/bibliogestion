@@ -1,3 +1,4 @@
+<!-- filepath: src/main/webapp/WEB-INF/views/prolongement-form.jsp -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,7 +10,7 @@
         <label for="nouvelleDateRetour">Nouvelle date de retour :</label>
         <input type="date" name="nouvelleDateRetour" required />
         <button type="submit">Valider</button>
-        <a href="/adherents">Annuler</a>
+        <a href="/liste-exemplaires">Annuler</a>
     </form>
 </body>
 </html>

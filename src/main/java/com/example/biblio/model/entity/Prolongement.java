@@ -21,6 +21,9 @@ public class Prolongement {
     @Column(name = "nouvelle_date_retour", nullable = false)
     private LocalDate nouvelleDateRetour;
 
+    @Column(name = "statut_validation")
+    private String statutValidation = "en_attente"; 
+
     @ManyToOne
     @JoinColumn(name = "id_statut")
     private Statut statut;
@@ -65,4 +68,11 @@ public class Prolongement {
     public void setStatut(Statut statut) {
         this.statut = statut;
     }
+    public String getStatutValidation() {
+    return statutValidation;
+}
+
+    public void setStatutValidation(String statutValidation) {
+        this.statutValidation = statutValidation;
+}
 }

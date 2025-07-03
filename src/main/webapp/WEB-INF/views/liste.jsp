@@ -9,6 +9,9 @@
     <a href="/adherents/new">Ajouter unadherent</a>
     <a href="/prets/new">Faire un prêt</a>
     <a href="/prets/return">Rendre un livre</a>
+    <a href="/admin/prolongements">
+    <button>Valider les demandes de prolongement</button>
+</a>
     <table border="1">
         <tr>
             <th>ID</th>

@@ -18,15 +18,13 @@ public class ProlongementService {
     private PretRepository pretRepository;
 
     public Prolongement demanderProlongement(Long pretId, LocalDate nouvelleDateRetour, Statut statut) {
-        Pret pret = pretRepository.findById(pretId).orElseThrow();
-        Prolongement prolongement = new Prolongement();
-        prolongement.setPret(pret);
-        prolongement.setDateProlongement(LocalDate.now());
-        prolongement.setNouvelleDateRetour(nouvelleDateRetour);
-        prolongement.setStatut(statut);
-        // Mettre à jour la date de retour prévue du prêt
-        pret.setDateRetourPrevue(nouvelleDateRetour);
-        pretRepository.save(pret);
-        return prolongementRepository.save(prolongement);
-    }
+    Pret pret = pretRepository.findById(pretId).orElseThrow();
+    Prolongement prolongement = new Prolongement();
+    prolongement.setPret(pret);
+    prolongement.setDateProlongement(LocalDate.now());
+    prolongement.setNouvelleDateRetour(nouvelleDateRetour);
+    prolongement.setStatut(statut);
+    // NE PAS modifier pret.setDateRetourPrevue ici
+    return prolongementRepository.save(prolongement);
+}
 }

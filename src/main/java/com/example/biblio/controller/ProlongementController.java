@@ -24,21 +24,21 @@ public class ProlongementController {
     @Autowired
     private StatutRepository statutRepository;
 
-    @GetMapping("/form/{pretId}")
-    public String showProlongementForm(@PathVariable Long pretId, Model model, HttpSession session) {
+    @GetMapping("/form/{idPret}")
+    public String showProlongementForm(@PathVariable("idPret") Long pretId, Model model, HttpSession session) {
         Pret pret = pretRepository.findById(pretId).orElseThrow();
         model.addAttribute("pret", pret);
         return "prolongement-form";
-    }
+}
 
     @PostMapping("/{pretId}")
     public String demanderProlongement(
-            @PathVariable Long pretId,
-            @RequestParam("nouvelleDateRetour") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate nouvelleDateRetour,
-            Model model) {
-        Statut statut = statutRepository.findByLibelle("en_cours").orElseThrow();
-        prolongementService.demanderProlongement(pretId, nouvelleDateRetour, statut);
-        model.addAttribute("message", "Prolongement demandé avec succès !");
-        return "redirect:/adherents"; // ou la page de suivi des prêts
-    }
+        @PathVariable Long pretId,
+        @RequestParam("nouvelleDateRetour") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate nouvelleDateRetour,
+        Model model) {
+    Statut statut = statutRepository.findByLibelle("en_cours").orElseThrow();
+    prolongementService.demanderProlongement(pretId, nouvelleDateRetour, statut);
+    model.addAttribute("message", "Prolongement demandé avec succès !");
+    return "redirect:/liste-exemplaires";
 }
+    }

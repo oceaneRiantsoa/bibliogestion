@@ -26,28 +26,38 @@
         </c:forEach>
     </table>
 
-    <h2>Mes prêts en cours</h2>
-    <c:if test="${not empty prets}">
-        <table border="1">
+   <h2>Mes prêts en cours</h2>
+<c:if test="${not empty prets}">
+    <table border="1">
+        <tr>
+            <th>Livre</th>
+            <th>Date de prêt</th>
+            <th>Date retour prévue</th>
+            <th>Prolongement</th>
+            <th>Statut prolongement</th>
+        </tr>
+        <c:forEach var="pret" items="${prets}">
             <tr>
-                <th>Livre</th>
-                <th>Date de prêt</th>
-                <th>Date retour prévue</th>
-                <th>Prolongement</th>
+                <td>${pret.exemplaire.livre.titre}</td>
+                <td>${pret.datePret}</td>
+                <td>${pret.dateRetourPrevue}</td>
+                <td>
+                    <a href="/prolongement/form/${pret.idPret}">Demander prolongement</a>
+                </td>
+                <td>
+                    <c:choose>
+                        <c:when test="${prolongements[pret.idPret] != null}">
+                            <c:out value="${prolongements[pret.idPret].statutValidation}" />
+                        </c:when>
+                        <c:otherwise>
+                            -
+                        </c:otherwise>
+                    </c:choose>
+                </td>
             </tr>
-            <c:forEach var="pret" items="${prets}">
-                <tr>
-                    <td>${pret.exemplaire.livre.titre}</td>
-                    <td>${pret.datePret}</td>
-                    <td>${pret.dateRetourPrevue}</td>
-                    <td>
-                        <a href="/prolongement/form/${pret.idPret}">Demander prolongement</a>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:if>
-
+        </c:forEach>
+    </table>
+</c:if>
         <a href="/" style="float:right; color:red; margin-left:20px;">Déconnexion</a>
     
 </body>

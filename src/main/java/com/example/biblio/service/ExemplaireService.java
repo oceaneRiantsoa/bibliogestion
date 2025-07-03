@@ -11,7 +11,10 @@ public class ExemplaireService {
     @Autowired
     private ExemplaireRepository exemplaireRepository;
 
-    public List<Exemplaire> findAllDisponibles() {
+    public List<Exemplaire> searchDisponibles(String query) {
+    if (query == null || query.isBlank()) {
         return exemplaireRepository.findByDisponibleTrue();
     }
+    return exemplaireRepository.findByDisponibleTrueAndLivre_TitreContainingIgnoreCaseOrLivre_AuteurContainingIgnoreCase(query, query);
+}
 }

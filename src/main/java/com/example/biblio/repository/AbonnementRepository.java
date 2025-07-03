@@ -10,6 +10,7 @@ import java.util.List;
 public interface AbonnementRepository extends JpaRepository<Abonnement, Long> {
     List<Abonnement> findByAdherent(Adherent adherent);
     boolean existsByAdherentAndDateDebutLessThanEqualAndDateFinGreaterThanEqual(Adherent adherent, LocalDate now1, LocalDate now2);
-} {
+    } 
+
     
-}
+

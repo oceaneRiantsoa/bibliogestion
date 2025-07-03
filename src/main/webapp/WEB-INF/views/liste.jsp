@@ -33,5 +33,7 @@
             </tr>
         </c:forEach>
     </table>
+
+    <a href="/abonnements/new/${adherent.idAdherent}">Faire abonnement</a>
 </body>
 </html>

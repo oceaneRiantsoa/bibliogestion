@@ -7,6 +7,10 @@
 </head>
 <body>
     <h1>Liste des exemplaires disponibles</h1>
+    <form method="get" action="/liste-exemplaires">
+        <input type="text" name="q" placeholder="Rechercher un livre..." value="${param.q != null ? param.q : ''}" />
+        <button type="submit">Rechercher</button>
+    </form>
     <table border="1">
         <tr>
             <th>Titre</th>

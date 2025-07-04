@@ -1,0 +1,72 @@
+/* Style général */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #FFF8F8;
+    color: #800020;
+    margin: 40px 60px;
+}
+
+/* Titres */
+h1, h2 {
+    text-align: center;
+    color: #800020;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 15px rgba(128, 0, 32, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+thead tr {
+    background-color: #D46A6A;
+    color: white;
+    font-weight: 700;
+}
+
+th, td {
+    padding: 14px 20px;
+    text-align: left;
+    border-bottom: 1px solid #F0D9D9;
+    font-size: 16px;
+}
+
+tbody tr:hover {
+    background-color: #F9E5E5;
+}
+
+/* Boutons */
+a.btn-reserver, a.btn-prolongement, a.btn-deconnexion {
+    display: inline-block;
+    background-color: #800020;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+a.btn-reserver:hover, a.btn-prolongement:hover {
+    background-color: #D46A6A;
+    transform: scale(1.05);
+}
+
+/* Bouton déconnexion flottant en bas à droite */
+a.btn-deconnexion {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    box-shadow: 0 4px 10px rgba(128, 0, 32, 0.3);
+}
+
+a.btn-deconnexion:hover {
+    background-color: #D46A6A;
+    transform: scale(1.1);
+}

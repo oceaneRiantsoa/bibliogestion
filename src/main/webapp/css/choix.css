@@ -1,0 +1,233 @@
+/* Styles pour la page de choix - Bibliothèque */
+/* Palette: Bordeaux (#800020) / Vieux rose (#C08081) */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #f9f5f5 0%, #f0e6e8 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(128, 0, 32, 0.15);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+}
+
+.header {
+    background: linear-gradient(135deg, #800020 0%, #9a0026 100%);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.header h1 {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 16px;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+.choices-container {
+    padding: 50px 30px;
+    text-align: center;
+}
+
+.choice-card {
+    background: linear-gradient(135deg, #faf8f9 0%, #f5f0f2 100%);
+    border: 2px solid #f0e6e8;
+    border-radius: 12px;
+    padding: 30px 20px;
+    margin: 20px 0;
+    text-decoration: none;
+    color: #800020;
+    display: block;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.choice-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(192, 128, 129, 0.2);
+    border-color: #C08081;
+}
+
+.choice-card:active {
+    transform: translateY(-2px);
+}
+
+.choice-card .icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #C08081;
+}
+
+.choice-card h2 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #800020;
+}
+
+.choice-card p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.admin-card {
+    background: linear-gradient(135deg, #800020 0%, #9a0026 100%);
+    color: white;
+    border-color: #800020;
+}
+
+.admin-card .icon {
+    color: #C08081;
+}
+
+.admin-card h2 {
+    color: white;
+}
+
+.admin-card p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.admin-card:hover {
+    background: linear-gradient(135deg, #9a0026 0%, #800020 100%);
+    box-shadow: 0 8px 25px rgba(128, 0, 32, 0.3);
+}
+
+.adherent-card {
+    background: linear-gradient(135deg, #C08081 0%, #d4969a 100%);
+    color: white;
+    border-color: #C08081;
+}
+
+.adherent-card .icon {
+    color: white;
+}
+
+.adherent-card h2 {
+    color: white;
+}
+
+.adherent-card p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.adherent-card:hover {
+    background: linear-gradient(135deg, #d4969a 0%, #C08081 100%);
+    box-shadow: 0 8px 25px rgba(192, 128, 129, 0.3);
+}
+
+.footer {
+    padding: 30px;
+    text-align: center;
+    background: #faf8f9;
+    border-top: 1px solid #f0e6e8;
+}
+
+.footer p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.back-link {
+    display: inline-block;
+    color: #800020;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    padding: 8px 16px;
+    border: 1px solid #f0e6e8;
+    border-radius: 6px;
+}
+
+.back-link:hover {
+    color: #C08081;
+    background: #faf8f9;
+    border-color: #C08081;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.choice-card {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.choice-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.choice-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        margin: 10px;
+    }
+    
+    .header {
+        padding: 30px 15px;
+    }
+    
+    .header h1 {
+        font-size: 24px;
+    }
+    
+    .choices-container {
+        padding: 40px 20px;
+    }
+    
+    .choice-card {
+        padding: 25px 15px;
+        margin: 15px 0;
+    }
+    
+    .choice-card .icon {
+        font-size: 40px;
+    }
+    
+    .choice-card h2 {
+        font-size: 20px;
+    }
+    
+    .footer {
+        padding: 20px;
+    }
+}

@@ -2,19 +2,30 @@
 <html>
 <head>
     <title>Connexion Admin</title>
+    <link rel="stylesheet" href="/css/login-styles.css">
 </head>
 <body>
-    <h1>Connexion Admin</h1>
-    <form method="post" action="/login-admin">
-        <label>Nom d'utilisateur :</label>
-        <input type="text" name="nom_utilisateur" required><br>
-        <label>Mot de passe :</label>
-        <input type="password" name="mot_de_passe" required><br>
-        <button type="submit">Se connecter</button>
-    </form>
-    <c:if test="${not empty error}">
-        <p style="color:red;">${error}</p>
-    </c:if>
-    <a href="/">Retour</a>
+    <div class="container">
+        <div class="header">
+            <h1>Connexion Admin</h1>
+        </div>
+        <div class="form-container">
+            <form method="post" action="/login-admin">
+                <div class="form-group">
+                    <label>Nom d'utilisateur :</label>
+                    <input type="text" name="nom_utilisateur" required>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe :</label>
+                    <input type="password" name="mot_de_passe" required>
+                </div>
+                <button type="submit" class="btn">Se connecter</button>
+            </form>
+            <c:if test="${not empty error}">
+                <div class="error">${error}</div>
+            </c:if>
+            <a href="/" class="back-link">Retour</a>
+        </div>
+    </div>
 </body>
 </html>

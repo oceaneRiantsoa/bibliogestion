@@ -1,0 +1,73 @@
+body {
+    font-family: 'Poppins', 'Arial', sans-serif;
+    background-color: #FFF8F8;
+    color: #800020;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #800020;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+form {
+    max-width: 500px;
+    margin: auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #F0D9D9;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="date"]:focus {
+    border-color: #800020;
+    outline: none;
+}
+
+button {
+    background-color: #800020;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #D46A6A;
+    transform: scale(1.05);
+}
+
+a {
+    color: #800020;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #D46A6A;
+}

@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>Liste des adhérents</title>
+    <link rel="stylesheet" href="/css/listeAdm.css">
 </head>
 <body>
     <h1>Liste des adhérents</h1>

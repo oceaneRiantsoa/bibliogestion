@@ -2,19 +2,30 @@
 <html>
 <head>
     <title>Connexion Adhérent</title>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 <body>
-    <h1>Connexion Adhérent</h1>
-    <form method="post" action="/login-adherent">
-        <label>Nom :</label>
-        <input type="text" name="nom" required><br>
-        <label>Email :</label>
-        <input type="email" name="email" required><br>
-        <button type="submit">Se connecter</button>
-    </form>
-    <c:if test="${not empty error}">
-        <p style="color:red;">${error}</p>
-    </c:if>
-    <a href="/">Retour</a>
+    <div class="container">
+        <div class="header">
+            <h1>Connexion Adhérent</h1>
+        </div>
+        <div class="form-container">
+            <form method="post" action="/login-adherent">
+                <div class="form-group">
+                    <label>Nom :</label>
+                    <input type="text" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label>Email :</label>
+                    <input type="email" name="email" required>
+                </div>
+                <button type="submit" class="btn">Se connecter</button>
+            </form>
+            <c:if test="${not empty error}">
+                <div class="error">${error}</div>
+            </c:if>
+            <a href="/" class="back-link">Retour</a>
+        </div>
+    </div>
 </body>
 </html>

@@ -52,11 +52,12 @@ public class PretController {
 
     @PostMapping
     public String fairePret(
-        @RequestParam Long adherentId,
-        @RequestParam Long exemplaireId,
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRetourPrevue,
-        @RequestParam Long emplacementId,
-        Model model) {
+        
+    @RequestParam Long adherentId,
+    @RequestParam Long exemplaireId,
+    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRetourPrevue,
+    @RequestParam Long emplacementId,
+    Model model) {
 
     Adherent adherent = adherentRepository.findById(adherentId).orElseThrow();
     Exemplaire exemplaire = exemplaireRepository.findById(exemplaireId).orElseThrow();
@@ -70,7 +71,7 @@ public class PretController {
         model.addAttribute("adherents", adherentRepository.findAll());
         model.addAttribute("exemplaires", exemplaireRepository.findByDisponibleTrue());
         model.addAttribute("emplacements", emplacementRepository.findAll());
-        model.addAttribute("error", "Vous avez atteint le nombre de quota max");
+        model.addAttribute("error", e.getMessage()); // Affiche le vrai message d'erreur
         return "pret-form";
     }
 }

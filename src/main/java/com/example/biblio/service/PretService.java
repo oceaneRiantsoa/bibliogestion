@@ -11,12 +11,14 @@ import com.example.biblio.repository.AbonnementRepository;
 import com.example.biblio.repository.ExemplaireRepository;
 import com.example.biblio.repository.PenaliteRepository;
 import com.example.biblio.repository.ProlongementRepository;
+import com.example.biblio.repository.StatutRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+
 
 @Service
 public class PretService {
@@ -30,7 +32,8 @@ public class PretService {
     private AbonnementRepository abonnementRepository;
     @Autowired
     private ProlongementRepository prolongementRepository;
-
+    @Autowired
+    private StatutRepository statutRepository;
 
     public Pret fairePret(Adherent adherent, Exemplaire exemplaire, LocalDate dateRetourPrevue, Emplacement emplacement, Statut statut) {
     // 1. Vérifier la pénalité en cours
@@ -67,7 +70,9 @@ public class PretService {
     pret.setDatePret(LocalDate.now());
     pret.setDateRetourPrevue(dateRetourPrevue);
     pret.setEmplacement(emplacement);
-    pret.setStatut(statut);
+    Statut statutEnCours = statutRepository.findByLibelle("en_cours")
+    .orElseThrow(() -> new IllegalStateException("Statut 'en_cours' non trouvé"));
+pret.setStatut(statutEnCours);
 
     exemplaire.setDisponible(false);
     exemplaireRepository.save(exemplaire);
@@ -95,14 +100,18 @@ public class PretService {
         message = "Livre rendu à temps. Merci !";
     }
 
-    // Supprimer les prolongements liés AVANT de supprimer le prêt
+    // Mettre à jour le statut du prêt à "termine" avant suppression
+    Statut statutTermine = statutRepository.findByLibelle("termine").orElseThrow(() -> new IllegalStateException("Statut 'termine' non trouvé"));
+    pret.setStatut(statutTermine);
+    pretRepository.save(pret);
+
+    // Supprimer les prolongements liés (optionnel, si tu veux garder l'historique tu peux commenter)
     prolongementRepository.deleteAll(
         prolongementRepository.findAll().stream()
             .filter(p -> p.getPret().getIdPret().equals(pret.getIdPret()))
             .toList()
     );
 
-    pretRepository.delete(pret);
     exemplaire.setDisponible(true);
     exemplaireRepository.save(exemplaire);
 

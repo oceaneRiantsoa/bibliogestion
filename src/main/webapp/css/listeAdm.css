@@ -1,3 +1,118 @@
+
+body {
+    font-family: 'Poppins', 'Arial', sans-serif;
+    background-color: #FFF8F8; /* fond doux */
+    color: #800020; /* texte bordeaux */
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #800020;
+    font-size: 36px;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+a {
+    text-decoration: none;
+    color: #800020;
+    margin-right: 15px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #D46A6A; /* vieux rose au survol */
+}
+
+button {
+    background-color: #800020;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #D46A6A;
+    transform: scale(1.05);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+th, td {
+    border: 1px solid #F0D9D9;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #C08081;
+    color: white;
+    font-size: 18px;
+}
+
+tr:nth-child(even) {
+    background-color: #FBEAEA;
+}
+
+tr:hover {
+    background-color: #F0D9D9;
+    transition: background-color 0.3s ease;
+}
+
+a.deconnexion {
+    float: right;
+    color: red;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a.deconnexion:hover {
+    color: #800020;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+a[href*="/adherents/new"],
+a[href*="/prets/new"],
+a[href*="/prets/return"] {
+    display: inline-block;
+    margin-bottom: 15px;
+    background-color: #800020;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+a[href*="/adherents/new"]:hover,
+a[href*="/prets/new"]:hover,
+a[href*="/prets/return"]:hover {
+    background-color: #D46A6A;
+    transform: scale(1.05);
+}
+
 /* Styles pour la liste des adhérents - Bibliothèque */
 /* Palette: Bordeaux (#800020) / Vieux rose (#C08081) */
 
@@ -215,3 +330,4 @@ tr:nth-child(even):hover {
         margin-top: 15px;
     }
 }
+

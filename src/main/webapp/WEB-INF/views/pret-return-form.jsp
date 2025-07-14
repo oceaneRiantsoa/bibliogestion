@@ -3,12 +3,15 @@
 <html>
 <head>
     <title>Rendre un livre</title>
+    <link rel="stylesheet" href="/css/rendreLivre.css">
 </head>
 <body>
     <h1>Rendre un livre</h1>
+
     <c:if test="${not empty message}">
         <p style="color:blue;">${message}</p>
     </c:if>
+
     <form method="post" action="/prets/return">
         <label>Prêt à rendre :</label>
         <select name="pretId" required>
@@ -17,11 +20,14 @@
                     ${pret.adherent.nom} ${pret.adherent.prenom} - ${pret.exemplaire.livre.titre} (Retour prévu: ${pret.dateRetourPrevue})
                 </option>
             </c:forEach>
-        </select><br>
+        </select>
+
         <label>Date de rendu :</label>
-        <input type="date" name="dateRendu" required /><br>
+        <input type="date" name="dateRendu" required />
+
         <button type="submit">Valider le rendu</button>
     </form>
+
     <a href="/adherents">Retour</a>
 </body>
 </html>

@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Connexion Admin</title>
+
+    <link rel="stylesheet" href="/css/login-styles.css">
+=======
     <head>
     <title>Liste des exemplaires</title>
 <link rel="stylesheet" type="text/css" href="/css/login.css">

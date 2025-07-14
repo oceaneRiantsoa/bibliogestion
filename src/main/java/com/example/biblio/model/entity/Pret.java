@@ -2,6 +2,7 @@ package com.example.biblio.model.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 @Table(name = "Pret")
@@ -89,8 +90,8 @@ public class Pret {
         return statut;
     }
 
-    public void setStatut(Statut statut) {
-        this.statut = statut;
+    public void setStatut(Statut statut2) {
+        this.statut = statut2;
     }
 
      public Emplacement getEmplacement() {

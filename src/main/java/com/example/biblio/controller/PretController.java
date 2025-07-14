@@ -57,7 +57,8 @@ public class PretController {
     @RequestParam Long exemplaireId,
     @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRetourPrevue,
     @RequestParam Long emplacementId,
-    Model model) {
+    Model model) 
+    {
 
     Adherent adherent = adherentRepository.findById(adherentId).orElseThrow();
     Exemplaire exemplaire = exemplaireRepository.findById(exemplaireId).orElseThrow();

@@ -37,10 +37,15 @@ public class PretService {
 
     public Pret fairePret(Adherent adherent, Exemplaire exemplaire, LocalDate dateRetourPrevue, Emplacement emplacement, Statut statut) {
     // 1. Vérifier la pénalité en cours
-    boolean penalise = penaliteRepository.existsByAdherentAndLeveeFalseAndDateFinAfter(adherent, LocalDate.now());
-    if (penalise) {
-        throw new IllegalStateException("Cet adhérent est pénalisé et ne peut pas emprunter pour le moment.");
-    }
+    Penalite penalite = penaliteRepository
+    .findFirstByAdherentAndLeveeFalseOrderByDateFinDesc(adherent)
+    .orElse(null);
+
+        if (penalite != null && LocalDate.now().isBefore(penalite.getDateFin().plusDays(1))) {
+    throw new IllegalStateException(
+        "Cet adhérent est pénalisé jusqu'au " + penalite.getDateFin() + " et ne peut pas emprunter."
+    );
+}
 
     // 2. Vérifier l'abonnement actif
     boolean abonne = abonnementRepository.existsByAdherentAndDateDebutLessThanEqualAndDateFinGreaterThanEqual(

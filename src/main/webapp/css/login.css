@@ -1,0 +1,175 @@
+/* Styles pour les pages de connexion - Bibliothèque */
+/* Palette: Bordeaux (#800020) / Vieux rose (#C08081) */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #f9f5f5 0%, #f0e6e8 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(128, 0, 32, 0.15);
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+}
+
+.header {
+    background: linear-gradient(135deg, #800020 0%, #9a0026 100%);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.form-container {
+    padding: 40px 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #800020;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #f0e6e8;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #faf8f9;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #C08081;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(192, 128, 129, 0.1);
+}
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #C08081 0%, #d4969a 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(192, 128, 129, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.error {
+    color: #800020;
+    background: #fdf2f3;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid #C08081;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #800020;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #C08081;
+    text-decoration: underline;
+}
+
+/* Styles pour la version avec onglets (optionnel) */
+.toggle-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.toggle-btn {
+    background: #f5e6e8;
+    border: none;
+    padding: 12px 24px;
+    margin: 0 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #800020;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.toggle-btn.active {
+    background: #C08081;
+    color: white;
+}
+
+.form-section {
+    display: none;
+}
+
+.form-section.active {
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        margin: 10px;
+    }
+    
+    .form-container {
+        padding: 30px 20px;
+    }
+    
+    .toggle-btn {
+        padding: 10px 18px;
+        font-size: 13px;
+    }
+}

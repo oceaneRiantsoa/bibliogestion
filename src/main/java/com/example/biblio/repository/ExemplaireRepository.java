@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ExemplaireRepository extends JpaRepository<Exemplaire, Long> {
     List<Exemplaire> findByDisponibleTrue();
+    List<Exemplaire> findByDisponibleTrueAndLivre_TitreContainingIgnoreCaseOrLivre_AuteurContainingIgnoreCase(String titre, String auteur);
 }

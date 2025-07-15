@@ -2,7 +2,7 @@ package com.example.biblio.model.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.Optional;
+
 
 @Entity
 @Table(name = "Pret")

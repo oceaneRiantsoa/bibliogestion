@@ -3,15 +3,7 @@
 <html>
 <head>
     <title>Liste des exemplaires</title>
-
     <link rel="stylesheet" href="/css/listeExemplaires.css" />
-</head>
-<body>
-    <h1>Liste des exemplaires disponibles</h1>
-    <table class="table-exemplaires">
-        <thead>
-=======
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css/style1.css' />">
 </head>
 <body>
     <h1>Liste des exemplaires disponibles</h1>
@@ -20,13 +12,7 @@
         <button type="submit">Rechercher</button>
     </form>
     <table border="1">
-        <tr>
-            <th>Titre</th>
-            <th>Auteur</th>
-            <th>État</th>
-            <th>Action</th>
-        </tr>
-        <c:forEach var="ex" items="${exemplaires}">
+        <thead>
             <tr>
                 <th>Titre</th>
                 <th>Auteur</th>

@@ -10,6 +10,7 @@ import com.example.biblio.repository.PretRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @RestController
@@ -34,6 +35,7 @@ public Map<String, Object> getAdherentInfos(@PathVariable Long id) {
     result.put("nom", adherent.getNom());
     result.put("prenom", adherent.getPrenom());
     result.put("profil", adherent.getProfil() != null ? adherent.getProfil().getNomProfil() : null);
+    result.put("statut", adherent.getStatut());
 
     // Quota
     int quotaMax = adherent.getProfil() != null ? adherent.getProfil().getQuotaMaxPret() : 0;
@@ -44,6 +46,7 @@ public Map<String, Object> getAdherentInfos(@PathVariable Long id) {
     result.put("quotaRestant", quotaRestant);
 
     // Abonnement actif (le plus récent)
+    LocalDate today = LocalDate.now();
     Optional<Abonnement> abonnementOpt = abonnementRepository.findByAdherent(adherent)
         .stream()
         .max(Comparator.comparing(Abonnement::getDateFin));
@@ -53,8 +56,12 @@ public Map<String, Object> getAdherentInfos(@PathVariable Long id) {
         abMap.put("dateDebut", ab.getDateDebut());
         abMap.put("dateFin", ab.getDateFin());
         result.put("abonnement", abMap);
+        // Vérifie si aujourd'hui est dans l'intervalle de l'abonnement
+        boolean abonne = !today.isBefore(ab.getDateDebut()) && !today.isAfter(ab.getDateFin());
+        result.put("abonne", abonne);
     } else {
         result.put("abonnement", null);
+        result.put("abonne", false);
     }
 
     // Pénalité en cours (la plus récente non levée)

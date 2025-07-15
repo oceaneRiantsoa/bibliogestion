@@ -35,55 +35,68 @@ public class PretService {
     @Autowired
     private StatutRepository statutRepository;
 
-    public Pret fairePret(Adherent adherent, Exemplaire exemplaire, LocalDate dateRetourPrevue, Emplacement emplacement, Statut statut) {
-    // 1. Vérifier la pénalité en cours
-    Penalite penalite = penaliteRepository
-    .findFirstByAdherentAndLeveeFalseOrderByDateFinDesc(adherent)
-    .orElse(null);
+    // ...existing code...
+    public Pret fairePret(Adherent adherent, Exemplaire exemplaire, LocalDate datePret, LocalDate dateRetourPrevue, Emplacement emplacement, Statut statut) {
+        // Vérifier la pénalité à la date du prêt
+        Penalite penalite = penaliteRepository
+            .findFirstByAdherentAndLeveeFalseOrderByDateFinDesc(adherent)
+            .orElse(null);
 
-        if (penalite != null && LocalDate.now().isBefore(penalite.getDateFin().plusDays(1))) {
-    throw new IllegalStateException(
-        "Cet adhérent est pénalisé jusqu'au " + penalite.getDateFin() + " et ne peut pas emprunter."
-    );
-}
+        if (penalite != null && datePret.isBefore(penalite.getDateFin().plusDays(1))) {
+            throw new IllegalStateException(
+                "Cet adhérent est pénalisé jusqu'au " + penalite.getDateFin() + " et ne peut pas emprunter."
+            );
+        }
 
-    // 2. Vérifier l'abonnement actif
-    boolean abonne = abonnementRepository.existsByAdherentAndDateDebutLessThanEqualAndDateFinGreaterThanEqual(
-        adherent, LocalDate.now(), LocalDate.now());
-    if (!abonne) {
-        throw new IllegalStateException("Cet adhérent n'a pas d'abonnement actif.");
+        // Vérifier l'abonnement actif à la date du prêt
+        boolean abonne = abonnementRepository.existsByAdherentAndDateDebutLessThanEqualAndDateFinGreaterThanEqual(
+            adherent, datePret, datePret);
+        if (!abonne) {
+            throw new IllegalStateException("Cet adhérent n'a pas d'abonnement actif.");
+        }
+
+        // Vérifier le quota de prêts à la date du prêt
+        long nbPretsEnCours = pretRepository.countByAdherentAndStatut_LibelleAndDatePretLessThanEqualAndDateRetourPrevueGreaterThanEqual(
+            adherent, "en_cours", datePret, datePret);
+        int quotaMax = adherent.getProfil() != null ? adherent.getProfil().getQuotaMaxPret() : 0;
+        if (nbPretsEnCours >= quotaMax) {
+            throw new IllegalStateException("Quota de prêts atteint pour cet adhérent à cette date.");
+        }
+
+        // Vérifier la disponibilité de l'exemplaire à la date du prêt
+        boolean dejaPris = pretRepository.existsByExemplaireAndStatut_LibelleAndDatePretLessThanEqualAndDateRetourPrevueGreaterThanEqual(
+            exemplaire, "en_cours", datePret, datePret);
+        if (dejaPris || !exemplaire.getDisponible()) {
+            throw new IllegalStateException("Ce livre est déjà emprunté à la date choisie.");
+        }
+
+        // Vérifier l'âge minimum requis par le livre
+        int ageAdherent = adherent.getAge() != null ? adherent.getAge() : 0;
+        int ageMinLivre = exemplaire.getLivre().getAgeMinimum() != null ? exemplaire.getLivre().getAgeMinimum() : 0;
+        if (ageAdherent < ageMinLivre) {
+            throw new IllegalStateException("L'âge de l'adhérent est inférieur à l'âge minimum requis pour ce livre.");
+        }
+
+        // Création du prêt
+        Pret pret = new Pret();
+        pret.setAdherent(adherent);
+        pret.setExemplaire(exemplaire);
+        pret.setDatePret(datePret);
+        pret.setDateRetourPrevue(dateRetourPrevue);
+        pret.setEmplacement(emplacement);
+        Statut statutEnCours = statutRepository.findByLibelle("en_cours")
+            .orElseThrow(() -> new IllegalStateException("Statut 'en_cours' non trouvé"));
+        pret.setStatut(statutEnCours);
+
+        // Rendre l'exemplaire indisponible si le prêt commence aujourd'hui
+        if (datePret.equals(LocalDate.now())) {
+            exemplaire.setDisponible(false);
+            exemplaireRepository.save(exemplaire);
+        }
+
+        return pretRepository.save(pret);
     }
-
-   // 3. Vérifier le quota de prêts
-    long nbPretsEnCours = pretRepository.countByAdherentAndStatut_Libelle(adherent, "en_cours");
-    int quotaMax = adherent.getProfil() != null ? adherent.getProfil().getQuotaMaxPret() : 0;
-    if (nbPretsEnCours >= quotaMax) {
-        throw new IllegalStateException("Quota de prêts atteint pour cet adhérent.");
-}
-
-    // Vérifier l'âge minimum requis par le livre
-    int ageAdherent = adherent.getAge() != null ? adherent.getAge() : 0;
-    int ageMinLivre = exemplaire.getLivre().getAgeMinimum() != null ? exemplaire.getLivre().getAgeMinimum() : 0;
-    if (ageAdherent < ageMinLivre) {
-        throw new IllegalStateException("L'âge de l'adhérent est inférieur à l'âge minimum requis pour ce livre.");
-    }
-
-    // Création du prêt
-    Pret pret = new Pret();
-    pret.setAdherent(adherent);
-    pret.setExemplaire(exemplaire);
-    pret.setDatePret(LocalDate.now());
-    pret.setDateRetourPrevue(dateRetourPrevue);
-    pret.setEmplacement(emplacement);
-    Statut statutEnCours = statutRepository.findByLibelle("en_cours")
-    .orElseThrow(() -> new IllegalStateException("Statut 'en_cours' non trouvé"));
-pret.setStatut(statutEnCours);
-
-    exemplaire.setDisponible(false);
-    exemplaireRepository.save(exemplaire);
-
-    return pretRepository.save(pret);
-}
+// ...existing code...
 
       public String rendrePret(Pret pret, LocalDate dateRendu) {
     Exemplaire exemplaire = pret.getExemplaire();

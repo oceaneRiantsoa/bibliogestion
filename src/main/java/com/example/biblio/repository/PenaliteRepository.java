@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PenaliteRepository extends JpaRepository<Penalite, Long> {
     Optional<Penalite> findFirstByAdherentAndLeveeFalseOrderByDateFinDesc(Adherent adherent);
+    long countByLivre_IdLivre(Long idLivre);
+
 }

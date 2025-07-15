@@ -43,6 +43,7 @@ INSERT INTO Livre (titre, genre, auteur, annee, age_minimum) VALUES ('Orgueil et
 INSERT INTO Exemplaire (id_livre, etat, disponible) VALUES (1, 'neuf', FALSE); -- pret 1
 INSERT INTO Exemplaire (id_livre, etat, disponible) VALUES (2, 'neuf', FALSE); -- pret 2
 INSERT INTO Exemplaire (id_livre, etat, disponible) VALUES (3, 'neuf', FALSE); -- pret 3
+INSERT INTO Exemplaire (id_livre, etat, disponible) VALUES (3, 'bon', TRUE);
 INSERT INTO Exemplaire (id_livre, etat, disponible) VALUES (4, 'bon', TRUE);
 INSERT INTO Exemplaire (id_livre, etat, disponible) VALUES (5, 'bon', TRUE);
 INSERT INTO Exemplaire (id_livre, etat, disponible) VALUES (6, 'neuf', TRUE);

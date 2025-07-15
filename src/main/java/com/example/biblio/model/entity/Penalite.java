@@ -27,6 +27,11 @@ public class Penalite {
     @Column(name = "levee", nullable = false)
     private Boolean levee = false;
 
+    @ManyToOne
+    @JoinColumn(name = "id_livre")
+    private Livre livre;
+
+
     // Getters and Setters
     public Long getIdPenalite() {
         return idPenalite;

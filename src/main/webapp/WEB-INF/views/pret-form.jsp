@@ -27,6 +27,9 @@
             </c:forEach>
         </select>
 
+        <label>Date du prêt :</label>
+        <input type="date" name="datePret" required />
+
         <label>Date retour prévue :</label>
         <input type="date" name="dateRetourPrevue" required />
 
@@ -39,6 +42,7 @@
 
         <button type="submit">Valider le prêt</button>
     </form>
+
 
     <c:if test="${not empty error}">
         <p style="color:red;">${error}</p>

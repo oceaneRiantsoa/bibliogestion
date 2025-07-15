@@ -50,32 +50,33 @@ public class PretController {
         return "pret-return-form";
     }
 
+    // ...existing code...
     @PostMapping
     public String fairePret(
-        
-    @RequestParam Long adherentId,
-    @RequestParam Long exemplaireId,
-    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRetourPrevue,
-    @RequestParam Long emplacementId,
-    Model model) 
+        @RequestParam Long adherentId,
+        @RequestParam Long exemplaireId,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate datePret,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRetourPrevue,
+        @RequestParam Long emplacementId,
+        Model model) 
     {
+        Adherent adherent = adherentRepository.findById(adherentId).orElseThrow();
+        Exemplaire exemplaire = exemplaireRepository.findById(exemplaireId).orElseThrow();
+        Emplacement emplacement = emplacementRepository.findById(emplacementId).orElseThrow();
+        Statut statut = statutRepository.findByLibelle("en_cours").orElseThrow();
 
-    Adherent adherent = adherentRepository.findById(adherentId).orElseThrow();
-    Exemplaire exemplaire = exemplaireRepository.findById(exemplaireId).orElseThrow();
-    Emplacement emplacement = emplacementRepository.findById(emplacementId).orElseThrow();
-    Statut statut = statutRepository.findByLibelle("en_cours").orElseThrow();
-
-    try {
-        pretService.fairePret(adherent, exemplaire, dateRetourPrevue, emplacement, statut);
-        return "redirect:/prets/new?success";
-    } catch (IllegalStateException e) {
-        model.addAttribute("adherents", adherentRepository.findAll());
-        model.addAttribute("exemplaires", exemplaireRepository.findByDisponibleTrue());
-        model.addAttribute("emplacements", emplacementRepository.findAll());
-        model.addAttribute("error", e.getMessage()); // Affiche le vrai message d'erreur
-        return "pret-form";
+        try {
+            pretService.fairePret(adherent, exemplaire, datePret, dateRetourPrevue, emplacement, statut);
+            return "redirect:/prets/new?success";
+        } catch (IllegalStateException e) {
+            model.addAttribute("adherents", adherentRepository.findAll());
+            model.addAttribute("exemplaires", exemplaireRepository.findByDisponibleTrue());
+            model.addAttribute("emplacements", emplacementRepository.findAll());
+            model.addAttribute("error", e.getMessage());
+            return "pret-form";
+        }
     }
-}
+// ...existing code...
 
     @PostMapping("/return")
     public String rendrePret(

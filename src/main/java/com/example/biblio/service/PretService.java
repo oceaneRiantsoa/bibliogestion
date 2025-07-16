@@ -106,14 +106,19 @@ public class PretService {
     String message;
 
     if (retard > 0) {
+        // Récupérer le nombre de jours de pénalité selon le profil
+        int joursPenalite = 1; // Valeur par défaut
+        if (adherent.getProfil() != null && adherent.getProfil().getJourPenalite() != null) {
+            joursPenalite = adherent.getProfil().getJourPenalite();
+        }
         Penalite penalite = new Penalite();
         penalite.setAdherent(adherent);
         penalite.setRaison("Retard de retour");
         penalite.setDatePenalite(dateRendu);
-        penalite.setDateFin(dateRendu.plusDays(retard));
+        penalite.setDateFin(dateRendu.plusDays(joursPenalite));
         penalite.setLevee(false);
         penaliteRepository.save(penalite);
-        message = "Livre rendu avec " + retard + " jour(s) de retard. Vous êtes pénalisé pour " + retard + " jour(s).";
+        message = "Livre rendu avec " + retard + " jour(s) de retard. Vous êtes pénalisé pour " + joursPenalite + " jour(s).";
     } else {
         message = "Livre rendu à temps. Merci !";
     }
@@ -123,7 +128,7 @@ public class PretService {
     pret.setStatut(statutTermine);
     pretRepository.save(pret);
 
-    // Supprimer les prolongements liés (optionnel, si tu veux garder l'historique tu peux commenter)
+    // Supprimer les prolongements liés (optionnel)
     prolongementRepository.deleteAll(
         prolongementRepository.findAll().stream()
             .filter(p -> p.getPret().getIdPret().equals(pret.getIdPret()))

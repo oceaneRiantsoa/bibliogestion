@@ -20,6 +20,13 @@ public class Profil {
     private Integer quotaMaxReservation;
 
     // Getters and Setters
+
+    private Integer jourPenalite; // ou int jourPenalite;
+
+// Getter
+    public Integer getJourPenalite() {
+    return jourPenalite;
+}
     public Long getIdProfil() {
         return idProfil;
     }

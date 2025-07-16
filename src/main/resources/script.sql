@@ -1,19 +1,28 @@
--- Table des administrateurs
+-- ADMINISTRATEURS
 CREATE TABLE IF NOT EXISTS Admin (
     id_admin SERIAL PRIMARY KEY,
     nom_utilisateur VARCHAR(100) UNIQUE NOT NULL,
     mot_de_passe VARCHAR(255) NOT NULL
 );
 
--- Table des profils
+-- PROFILS
 CREATE TABLE IF NOT EXISTS Profil (
     id_profil SERIAL PRIMARY KEY,
     nom_profil VARCHAR(50) NOT NULL UNIQUE,
     quota_max_pret INT NOT NULL,
-    quota_max_reservation INT NOT NULL
+    quota_max_reservation INT NOT NULL,
+    quota_prolongement INT NOT NULL, 
+    jour_penalite INT NOT NULL
 );
 
--- Table des adhérents
+-- ABONNEMENTS
+CREATE TABLE IF NOT EXISTS Abonnement (
+    id_abonnement SERIAL PRIMARY KEY,
+    date_debut DATE NOT NULL,
+    date_fin DATE NOT NULL
+);
+
+-- ADHERENTS (avec référence vers abonnement)
 CREATE TABLE IF NOT EXISTS Adherent (
     id_adherent SERIAL PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
@@ -21,24 +30,25 @@ CREATE TABLE IF NOT EXISTS Adherent (
     age INT NOT NULL,
     numero VARCHAR(20),
     email VARCHAR(100) UNIQUE NOT NULL,
-    statut VARCHAR(20) DEFAULT 'actif',
-    id_profil INT REFERENCES Profil(id_profil)
+    statut VARCHAR(20),
+    id_profil INT REFERENCES Profil(id_profil),
+    id_abonnement INT REFERENCES Abonnement(id_abonnement)  -- FK vers abonnement
 );
 
--- Table des jours fériés
+-- JOURS FERIES
 CREATE TABLE IF NOT EXISTS Jour_Ferie (
     id_jour SERIAL PRIMARY KEY,
     date_ferie DATE UNIQUE NOT NULL,
     description VARCHAR(100)
 );
 
--- Table des statuts
+-- STATUTS
 CREATE TABLE IF NOT EXISTS Statut (
     id_statut SERIAL PRIMARY KEY,
     libelle VARCHAR(20) NOT NULL UNIQUE
 );
 
--- Table des livres
+-- LIVRES
 CREATE TABLE IF NOT EXISTS Livre (
     id_livre SERIAL PRIMARY KEY,
     titre VARCHAR(255) NOT NULL,
@@ -48,7 +58,7 @@ CREATE TABLE IF NOT EXISTS Livre (
     age_minimum INT
 );
 
--- Table des exemplaires physiques
+-- EXEMPLAIRES
 CREATE TABLE IF NOT EXISTS Exemplaire (
     id_exemplaire SERIAL PRIMARY KEY,
     id_livre INT REFERENCES Livre(id_livre),
@@ -56,13 +66,13 @@ CREATE TABLE IF NOT EXISTS Exemplaire (
     disponible BOOLEAN
 );
 
--- Table des emplacements de prêt
+-- EMPLACEMENTS
 CREATE TABLE IF NOT EXISTS Emplacement (
     id_emplacement SERIAL PRIMARY KEY,
     type_emplacement VARCHAR(20) NOT NULL UNIQUE
 );
 
--- Table des prêts
+-- PRETS
 CREATE TABLE IF NOT EXISTS Pret (
     id_pret SERIAL PRIMARY KEY,
     id_adherent INT REFERENCES Adherent(id_adherent),
@@ -73,15 +83,7 @@ CREATE TABLE IF NOT EXISTS Pret (
     id_statut INT REFERENCES Statut(id_statut)
 );
 
--- Table des abonnements
-CREATE TABLE IF NOT EXISTS Abonnement (
-    id_abonnement SERIAL PRIMARY KEY,
-    id_adherent INT REFERENCES Adherent(id_adherent),
-    date_debut DATE NOT NULL,
-    date_fin DATE NOT NULL
-);
-
--- Table des prolongements de prêt
+-- PROLONGEMENTS
 CREATE TABLE IF NOT EXISTS Prolongement (
     id_prolongement SERIAL PRIMARY KEY,
     id_pret INT REFERENCES Pret(id_pret),
@@ -90,7 +92,7 @@ CREATE TABLE IF NOT EXISTS Prolongement (
     id_statut INT REFERENCES Statut(id_statut)
 );
 
--- Table des réservations
+-- RESERVATIONS
 CREATE TABLE IF NOT EXISTS Reservation (
     id_reservation SERIAL PRIMARY KEY,
     id_adherent INT REFERENCES Adherent(id_adherent),
@@ -99,12 +101,11 @@ CREATE TABLE IF NOT EXISTS Reservation (
     id_statut INT REFERENCES Statut(id_statut)
 );
 
--- Table des pénalités
+-- PENALITES
 CREATE TABLE IF NOT EXISTS Penalite (
     id_penalite SERIAL PRIMARY KEY,
     id_adherent INT REFERENCES Adherent(id_adherent),
     raison VARCHAR(255) NOT NULL,
-    date_penalite DATE NOT NULL,
     date_fin DATE,
     levee BOOLEAN
 );
